@@ -1,95 +1,76 @@
-// var headerTitle = document.getElementById('header-title');
-// headerTitle.style.borderBottom = 'solid 3px #000'
+var form = document.getElementById('addForm');
+var itemList = document.getElementById('items');
+var filter = document.getElementById('filter');
 
-// var li = document.getElementsByTagName('li');
-// li[1].style.textContext = "hello 2";
-// li[1].style.fontWeight = "Bold";
-// console.log(li);
-// for(var i=0;i<li.length;i++){
-//     li[i].style.fontWeight = "Bold";
-//     li[i].style.backgroundColor = "yellow";
-// }
-// li[2].style.backgroundColor = "green";
-// li[4].style.backgroundColor = "green";
+// Form submit event
+form.addEventListener('submit', addItem);
+// Delete event
+itemList.addEventListener('click', removeItem);
+// Filter event
+filter.addEventListener('keyup', filterItems);
 
+// Add item
+function addItem(e){
+  e.preventDefault();
 
-// var li = document.querySelector('li:nth-child(2)');
-// li.style.backgroundColor = 'green';
-// var li = document.querySelector('li:nth-child(3)');
-// li.style.display = 'none';
+  // Get input value
+  var newItem = document.getElementById('item').value;
 
-// var li = document.querySelectorAll('li');
-// li[1].style.color = 'green'
-// var odd = document.querySelectorAll('li:nth-child(odd)');
-// for(var i=0;i<odd.length;i++){
-//     odd[i].style.backgroundColor = 'green';
-// }
+  // Create new li element
+  var li = document.createElement('li');
+  // Add class
+  li.className = 'list-group-item';
+  // Add text node with input value
+  li.appendChild(document.createTextNode(newItem));
 
+  // Create del button element
+  var deleteBtn = document.createElement('button');
 
-//parentNode
-var itemList = document.querySelector('#items');
-console.log(itemList.parentNode);
-console.log(itemList.parentNode.parentElement);
+  //Create an Edit Button 
+  var editBtn = document.createElement('button');
 
-//parentElement
-console.log(itemList.parentNode);
-console.log(itemList.parentNode.parentNode);
+  // Add classes to del button
+  deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+  
+  // Add classes to edit button
+  editBtn.className = 'btn btn-info btn-sm float-right';
 
-//childNodes
-console.log(itemList.childNodes);
+  // Append text node
+  deleteBtn.appendChild(document.createTextNode('X'));
+  editBtn.appendChild(document.createTextNode('edit'));
 
-//Children
-console.log(itemList.children);
-console.log(itemList.children[1]);
-itemList.children[1].style.backgroundColor = "yellow";
+  // Append button to li
+  li.appendChild(deleteBtn);
+  li.appendChild(editBtn);
 
-// //firstChild
-// console.log(itemList.firstChild);
+  // Append li to list
+  itemList.appendChild(li);
+  console.log(itemList);
+}
 
-// //firstElementChild
-// console.log(itemList.firstElementChild);
-// itemList.firstElementChild.textContent = "Hello 1";
+// Remove item
+function removeItem(e){
+  if(e.target.classList.contains('delete')){
+    if(confirm('Are You Sure?')){
+      var li = e.target.parentElement;
+      itemList.removeChild(li);
+    }
+  }
+}
 
-// //lastChild
-// console.log(itemList.lastChild);
-
-// //lastElementChild
-// console.log(itemList.lastElementChild);
-// itemList.lastElementChild.textContent = "Hello 4";
-
-// //nextSibling
-// console.log(itemList.nextSibling);
-
-// //nextElementSibling
-// console.log(itemList.nextElementSibling);
-
-// //previousSibling
-// console.log(itemList.previousSibling);
-
-// //previousElementSibling
-// console.log(itemList.previousElementSibling);
-// itemList.previousElementSibling.style.color = "yellow";
-
-//createElement create a div
-var newDiv = document.createElement('div');
-
-//Add Class
-newDiv.className = 'hello';
-//Add ID
-newDiv.id = 'hello1';
-//Add Attribute
-newDiv.setAttribute('title','Hello Div');
-
-
-//Create text node
-var newDivText = document.createTextNode('Hello World');
-//add text to div
-newDiv.appendChild(newDivText);
-
-//Adding Element Inside Html
-var container = document.querySelector('header .container');
-var h1 = document.querySelector('header h1');   
-console.log(newDiv);
-
-newDiv.style.fontSize = '30px';
-container.insertBefore(newDiv,h1)
+// Filter Items
+function filterItems(e){
+  // convert text to lowercase
+  var text = e.target.value.toLowerCase();
+  // Get lis
+  var items = itemList.getElementsByTagName('li');
+  // Convert to an array
+  Array.from(items).forEach(function(item){
+    var itemName = item.firstChild.textContent;
+    if(itemName.toLowerCase().indexOf(text) != -1){
+      item.style.display = 'block';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
