@@ -16,28 +16,11 @@
       crossorigin="anonymous"
     ></script>
     <title>Designing the registration Form</title>
-    <style>
-      body {
-          background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
-          background-repeat: no-repeat;
-        } 
-    </style>
   </head>
   <body class="text-center">
     <div class="container">
       <div class="row">
         <div class="col">
-          <div>
-            <h2>Book A Call</h2>
-          </div>
-
-          <div>
-            <h4 class="label">
-              Book a call slot and our representative will call you within 1hr
-              of selected time
-            </h4>
-          </div>
-          <div>
             <form id="myForm" >
               <label for="name" class="text-start">Name:</label><br />
               <input type="text" id="name" name="name" /><br />
@@ -46,12 +29,7 @@
               <label for="lname">Phone:</label><br />
               <input type="text" id="phone" name="phone" />
               <div>
-                <label for="lname">Time For call:</label><br />
-                <input type="date" id="lname" name="lname" /> &nbsp;
-                <input type="time" id="phone" name="phone" />
-              </div>
-              <div>
-                <button type="submit" onClick="onSubmit()">Get a call</button>
+                <button type="submit" onClick="onSubmit()">Book</button>
               </div>
 
             </form>
@@ -70,6 +48,9 @@
         const formValue = Object.fromEntries(formData.entries())
 
         localStorage.setItem('user-info',JSON.stringify(formValue))
+        var newDiv =  document.createElement('div')
+        newDiv.appendChild(document.createTextNode(JSON.stringify(formValue)))
+       form.appendChild(newDiv)
     }
     </script>
   </body>
