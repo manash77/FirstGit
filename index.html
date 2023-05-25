@@ -69,7 +69,7 @@
         const formData = new FormData(form)
         const formValue = Object.fromEntries(formData.entries())
 
-        localStorage.setItem('user-info',formValue)
+        localStorage.setItem('user-info',JSON.stringify(formValue))
     }
     </script>
   </body>
