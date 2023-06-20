@@ -40,23 +40,33 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
     <script>
-        function onSubmit(){
-        const form = document.getElementById('myForm')
-        form.addEventListener('submit',function(event){
-            event.preventDefault()
+      const form = document.getElementById('myForm')
+    function onSubmit(){
+      form.addEventListener('submit',function(event){
+          event.preventDefault()
+      })
+      const formData = new FormData(form)
+      const formValue = Object.fromEntries(formData.entries())
+      axios
+        .post('https://crudcrud.com/api/548fd3bcf8d94bde963ff9f7dff5113c/user-infos/',{formValue})
+        .then(res => {
+        console.log(res);
         })
-        const formData = new FormData(form)
-        const formValue = Object.fromEntries(formData.entries())
-        axios
-          .post('https://crudcrud.com/api/548fd3bcf8d94bde963ff9f7dff5113c/user-infos/',{formValue})
-          .then(res => {
-            var newDiv =  document.createElement('div')
-            newDiv.appendChild(document.createTextNode(JSON.stringify(res.data.formValue)))
-            form.appendChild(newDiv)
-          })
-          .catch(err => console.log(err))
-           
+        .catch(err => console.log(err))
     }
+
+    window.addEventListener('DOMContentLoaded',()=>{
+      axios('https://crudcrud.com/api/548fd3bcf8d94bde963ff9f7dff5113c/user-infos/').then(res =>{
+        console.log(res);
+        res.data.forEach(element => {
+          let newDiv =  document.createElement('div')
+          newDiv.appendChild(document.createTextNode(JSON.stringify(element.formValue)))
+          form.appendChild(newDiv)
+    
+        });
+      })  
+      
+    })
     </script>
   </body>
 </html>
