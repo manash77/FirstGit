@@ -10,6 +10,11 @@
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+      integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <div class="text-center py-5">
@@ -18,18 +23,22 @@
           <div class="container">
             <form id="candyForm">
               <label for="name" class="form-label">Candy Name</label>
-              <input type="text" class="form-control" />
+              <input type="text" name="candyName" class="form-control" />
 
               <label for="descritption" class="form-label">Descritption</label>
-              <input type="text" class="form-control" />
+              <input type="text" name="descritption" class="form-control" />
 
               <label for="price" class="form-label">Price</label>
-              <input type="number" class="form-control" />
+              <input type="number" name="price" class="form-control" />
 
               <label for="quantity" class="form-label">Quantity</label>
-              <input type="number" class="form-control" />
+              <input type="number" name="quantity" class="form-control" />
 
-              <button type="submit" class="btn btn-primary m-3">
+              <button
+                type="submit"
+                onClick="onSubmit()"
+                class="btn btn-primary m-3"
+              >
                 Add Item
               </button>
             </form>
@@ -37,12 +46,19 @@
         </div>
       </div>
     </div>
-
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
-      integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
-      crossorigin="anonymous"
-    ></script>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Descritption</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
     <script src="main.js"></script>
   </body>
 </html>
